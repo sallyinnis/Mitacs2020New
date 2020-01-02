@@ -67,13 +67,14 @@ p <- plot_mapbox(dat, x = ~long, y = ~lat) %>%
 
 p
 ```
+
 ```{r, error = FALSE, warning=FALSE}
 library(plotly)
 library(dplyr)
 
 p <- plot_mapbox(mode = 'scattermapbox') %>%
   add_markers(
-    data = CadTSF, x = ~Longitude, y = ~Latitude, text= ~Mine, pch = 3, color= ~Status, size = ~Current_Maximum_Height_m, hoverinfo = "text") %>%
+    data = CadTSF, x = ~Longitude, y = ~Latitude, text= ~Mine, size = 4, color= ~Status, hoverinfo = "text") %>%
  layout( plot_bgcolor = 'white', paper_bgcolor = 'white',
          mapbox = list(zoom = 3,
                        center = list(lat = 60,
