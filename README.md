@@ -3,4 +3,4 @@
 The below link will let you access the maps
 the excel document is the raw data used in the maps
 
-# https://sallyinnis.github.io/Mitacs2020New/
+# https://sallyinnis.github.io/Mitacs2020New/Canada-TSF-Locations.html
