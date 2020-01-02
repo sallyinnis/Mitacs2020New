@@ -1,7 +1,7 @@
 # Accessing Data/ code for Mitacs Interactive Maps
 The link below is the link to code chunk I am working on. 
 
-###The last map on the page is interactive and it shows the locations of the tailings storage facilities across Canada that will be used in our TSF runout analysis **(n = 137)**. 
+### The last map on the page is interactive and it shows the locations of the tailings storage facilities across Canada that will be used in our TSF runout analysis **(n = 137)**. 
 
 *These TSF were filtered with the following criteria:* 
   1. Location = Canada
