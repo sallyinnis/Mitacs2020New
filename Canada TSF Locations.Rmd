@@ -1,0 +1,85 @@
+---
+title: "MitacsTSFCanadaLocations"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, error = FALSE, warning=FALSE}
+library(tidyverse)
+library(maps)
+library(maptools)
+library(sp)
+library(mapdata)
+map('worldHires','Canada', xlim=c(-141,-53), ylim=c(40,85), col='gray90', fill=TRUE)
+
+```
+
+```{r, error = FALSE, warning=FALSE}
+df = read.csv('https://raw.githubusercontent.com/bcdunbar/datasets/master/meteorites_subset.csv')
+```
+
+
+```{r, error = FALSE, warning=FALSE}
+Sys.setenv('MAPBOX_TOKEN' = 'pk.eyJ1Ijoic2FsbHlpbm5pcyIsImEiOiJjazR3eWszdnEwN3B6M250aGt3YnM4aW9yIn0.KQelI9-fKQw9FfAkQRo6jA')
+```
+
+```{r, error = FALSE, warning=FALSE}
+library(readxl)
+CadTSF <- read_excel("Canadian Filtered TSFs.xlsx", 
+    sheet = "Filtered and Changed")
+#View(CadTSF)
+```
+
+```{r, error = FALSE, warning=FALSE}
+library(scales)  #for transparency
+map('worldHires','Canada', xlim=c(-141,-53), ylim=c(40,85), col='gray90', fill=TRUE)
+points(CadTSF$Longitude, CadTSF$Latitude, pch=19, col="red", cex=0.5) 
+```
+
+```{r, error = FALSE, warning=FALSE}
+library(mapproj)
+map('worldHires','Canada', xlim=c(-141,-53), ylim=c(40,85), col="grey80", fill=TRUE, projection="gilbert", orientation= c(90,0,225))
+lon <- c(-72, -66, -107, -154)  #fake longitude vector
+lat <- c(81.7, 64.6, 68.3, 60)  #fake latitude vector
+coord <- mapproject(CadTSF$Longitude, CadTSF$Latitude, proj="gilbert", orientation=c(90, 0, 225))  #convert points to projected lat/long
+points(coord, pch=20, cex=.8, col="red")  #plot converted points
+
+```
+
+```{r, error = FALSE, warning=FALSE}
+library(plotly)
+packageVersion('plotly')
+```
+
+```{r, error = FALSE, warning=FALSE}
+library(plotly)
+
+dat <- map_data("world","canada") %>% group_by(group)
+
+p <- plot_mapbox(dat, x = ~long, y = ~lat) %>%
+  layout(mapbox = list(zoom = 4,
+                       center = list(lat = ~median(lat),
+                                     lon = ~median(long))
+  ))
+
+p
+```
+```{r, error = FALSE, warning=FALSE}
+library(plotly)
+library(dplyr)
+
+p <- plot_mapbox(mode = 'scattermapbox') %>%
+  add_markers(
+    data = CadTSF, x = ~Longitude, y = ~Latitude, text= ~Mine, pch = 3, color= ~Status, size = ~Current_Maximum_Height_m, hoverinfo = "text") %>%
+ layout( plot_bgcolor = 'white', paper_bgcolor = 'white',
+         mapbox = list(zoom = 3,
+                       center = list(lat = 60,
+                                     lon = -97)
+  ))
+p
+```
+
+
