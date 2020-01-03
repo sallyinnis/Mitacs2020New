@@ -36,7 +36,7 @@ CadTSF <- read_excel("Canadian Filtered TSFs.xlsx",
 ```{r, error = FALSE, warning=FALSE}
 library(scales)  #for transparency
 map('worldHires','Canada', xlim=c(-141,-53), ylim=c(40,85), col='gray90', fill=TRUE)
-points(CadTSF$Longitude, CadTSF$Latitude, pch=19, col="red", cex=0.5) 
+points(CadTSF$Longitude, CadTSF$Latitude, pch=19, alpha = .9, col="red", cex=0.5) 
 ```
 
 ```{r, error = FALSE, warning=FALSE}
@@ -57,15 +57,14 @@ packageVersion('plotly')
 ```{r, error = FALSE, warning=FALSE}
 library(plotly)
 
-dat <- map_data("world","canada") %>% group_by(group)
+#dat <- map_data("world","canada") %>% group_by(group)
 
-p <- plot_mapbox(dat, x = ~long, y = ~lat) %>%
-  layout(mapbox = list(zoom = 4,
-                       center = list(lat = ~median(lat),
-                                     lon = ~median(long))
-  ))
+#p <- plot_mapbox(dat, x = ~long, y = ~lat) %>%
+ # layout(mapbox = list(zoom = 4,
+                      # center = list(lat = ~median(lat),
+                                    # lon = ~median(long)))
 
-p
+#p
 ```
 
 ```{r, error = FALSE, warning=FALSE}
