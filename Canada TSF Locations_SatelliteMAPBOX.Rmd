@@ -56,5 +56,12 @@ q <-  CadTSF %>%
       source = list("https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}")))))
 
 q
+
+api_create(q, filename = "r-docs-cad-tsfmaps")
+```
+```{r}
+#plotly login/api
+Sys.setenv("plotly_username"="sjinnis")
+Sys.setenv("plotly_api_key"="H7EUPJOLQncFo9wceSyD")
 ```
 
