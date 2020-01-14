@@ -10,8 +10,12 @@ The link below is the link to code chunk I am working on.
   4. TSF in database with unreliable/no Lat/Long information were removed
 The raw data was also categorized in consistent searchable terms ie. changing centerline and centreline to centerline. 
 
-## https://sallyinnis.github.io/Mitacs2020New/Canada-TSF-Locations.html
-
-
 The below link will let you access the maps
 the excel document is the raw data used in the maps. 
+
+## Basic map (API ACCESS)
+### https://sallyinnis.github.io/Mitacs2020New/Canada-TSF-Locations.html
+
+## Satellite map
+### https://sallyinnis.github.io/Mitacs2020New/Canada-TSF-Locations_SatelliteMAPBOX.html
+
