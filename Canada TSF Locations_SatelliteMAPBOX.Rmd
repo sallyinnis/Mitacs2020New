@@ -1,0 +1,60 @@
+---
+title: "MitacsTSFCanadaLocations"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, error = FALSE, warning=FALSE}
+library(tidyverse)
+library(maps)
+library(maptools)
+library(sp)
+library(mapdata)
+# map('worldHires','Canada', xlim=c(-141,-53), ylim=c(40,85), col='gray90', fill=TRUE)
+
+```
+
+```{r, error = FALSE, warning=FALSE}
+df = read.csv('https://raw.githubusercontent.com/bcdunbar/datasets/master/meteorites_subset.csv')
+```
+
+
+```{r, error = FALSE, warning=FALSE}
+Sys.setenv('MAPBOX_TOKEN' = 'pk.eyJ1Ijoic2FsbHlpbm5pcyIsImEiOiJjazR3eWszdnEwN3B6M250aGt3YnM4aW9yIn0.KQelI9-fKQw9FfAkQRo6jA')
+```
+
+```{r, error = FALSE, warning=FALSE}
+library(readxl)
+CadTSF <- read_excel("Canadian Filtered TSFs.xlsx", 
+    sheet = "Filtered and Changed")
+#View(CadTSF)
+```
+
+
+```{r,  error = FALSE, warning=FALSE}
+library(plotly)
+
+q <-  CadTSF %>%
+  plot_ly(
+    lat = ~Latitude,
+    lon = ~Longitude,
+    type = "scattermapbox",
+    hoverinfo = "text",
+    text = ~Mine,
+    color = ~Status, 
+    size = 4) %>%
+  layout(mapbox= list(
+    style = "white-bg",
+    zoom = 3,
+    center = list(lon = -97 ,lat= 60),
+    layers = list(list(
+      below = 'traces',
+      sourcetype = "raster",
+      source = list("https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}")))))
+
+q
+```
+
